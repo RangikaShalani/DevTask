@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route,Routes, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 //material UI import
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -51,12 +52,9 @@ function Login() {
             if(!values.password){
                 alert("Something in Worng, Password is Empty...!!! ") 
             }else{
-                if(values.userName!='admin' && values.password!='password'){
-                    alert("Something in Worng, User name or Password is Worng...!!! ") 
-                }else{
-                    const name = values.userName;
-                    navigate("/home", {state: {name}})
-                }
+                console.log("response");
+                const response= axios.post("http://restapi.adequateshop.com/api/authaccount/login", {values});
+                console.log(response);
             }
         }
     }
