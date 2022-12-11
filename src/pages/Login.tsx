@@ -13,48 +13,50 @@ import Button from '@mui/material/Button';
 
 //page or image import
 import loginGif from '../images/loginGIF.gif';
-
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
-
+import changeRoute from '../pages/changeRoute';
 
 
 function Login() {
     const navigate = useNavigate()
     type Values = {
-        userName : string,
+        email : string,
         password : string,
         
     }
     const [values,setValues] = useState<Values>({
-        userName : "",
+        email : "",
         password : "",
         
     });
+    
+    const [islogin, setLoginSuccess] = useState("false");
 
     const handleChange = (event : React.ChangeEvent<HTMLInputElement>) => {
         setValues({...values,[event.target.name] : event.target.value});
     }
 
-    const handleSubmit = (event : React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit =async (event : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        if(!values.userName){
+        if(!values.email){
             alert("Something in Worng, User name is Empty...!!! ")
         }else{
             if(!values.password){
                 alert("Something in Worng, Password is Empty...!!! ") 
             }else{
                 console.log("response");
-                const response= axios.post("http://restapi.adequateshop.com/api/authaccount/login", {values});
-                console.log(response);
+                const response= await axios.post("http://restapi.adequateshop.com/api/authaccount/login", values);
+                if(response.data.message=="success"){
+                    setLoginSuccess("true");
+                    const name = values.email;
+                    
+
+
+                    // navigate("/home", {state:{name}} );
+
+                }else{
+                    alert("Something in Worng , "+ response.data.message);
+                }
             }
         }
     }
@@ -82,7 +84,7 @@ function Login() {
                                             id="standard-basic" 
                                             label="User Name" 
                                             variant="standard"
-                                            name="userName"
+                                            name="email"
                                             onChange={handleChange}/>
                                         </Grid>
                                         <Grid style={{marginBottom:10}}>
