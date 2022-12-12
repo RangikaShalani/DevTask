@@ -39,7 +39,7 @@ function Login() {
         event.preventDefault();
 
         if(!values.email){
-            alert("Something in Worng, User name is Empty...!!! ")
+            alert("Something in Worng,  User name is Empty...!!! ")
         }else{
             if(!values.password){
                 alert("Something in Worng, Password is Empty...!!! ") 
