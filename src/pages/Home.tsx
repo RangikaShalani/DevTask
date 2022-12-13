@@ -10,8 +10,8 @@ import Typography from '@mui/material/Typography';
 function Home() {
 
     const location = useLocation();
-    const user = location.state;
-    const userDetails = JSON.parse(JSON.stringify(user));
+    const name = location.state;
+    const userDetails = JSON.parse(JSON.stringify(name));
     const navigate = useNavigate();
 
     return(

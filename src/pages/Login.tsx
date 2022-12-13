@@ -29,7 +29,7 @@ function Login() {
         
     });
     
-    const [islogin, setLoginSuccess] = useState("false");
+    
 
     const handleChange = (event : React.ChangeEvent<HTMLInputElement>) => {
         setValues({...values,[event.target.name] : event.target.value});
@@ -37,7 +37,7 @@ function Login() {
 
     const handleSubmit =async (event : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
+        alert(values.email);
         if(!values.email){
             alert("Something in Worng,  User name is Empty...!!! ")
         }else{
@@ -46,13 +46,13 @@ function Login() {
             }else{
                 console.log("response");
                 const response= await axios.post("http://restapi.adequateshop.com/api/authaccount/login", values);
-                if(response.data.message=="success"){
-                    setLoginSuccess("true");
+                console.log(response);
+                if(response.data.message === "success"){
+                    alert("ssssssssss");
+                    setIsLoading("true");
                     const name = values.email;
-                    
-
-
-                    // navigate("/home", {state:{name}} );
+                    alert("ssssssssss");
+                    navigate("/home", {state:{name}} );
 
                 }else{
                     alert("Something in Worng , "+ response.data.message);
@@ -113,3 +113,11 @@ function Login() {
 }
 
 export default Login;
+
+function setLoginSuccess(arg0: string) {
+    throw new Error('Function not implemented.');
+}
+function setIsLoading(arg0: string) {
+    throw new Error('Function not implemented.');
+}
+
