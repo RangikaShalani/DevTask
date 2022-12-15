@@ -48,10 +48,10 @@ function Login() {
                 const response= await axios.post("http://restapi.adequateshop.com/api/authaccount/login", values);
                 console.log(response);
                 if(response.data.message === "success"){
-                    alert("ssssssssss");
+                    
                     setIsLoading("true");
                     const name = values.email;
-                    alert("ssssssssss");
+                    
                     navigate("/home", {state:{name}} );
 
                 }else{

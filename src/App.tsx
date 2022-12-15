@@ -11,11 +11,6 @@ import changeRoute from "./pages/changeRoute"
 function App() {
   // const [islogin, setLoginSuccess] = useState("false"); 
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
-  // const location = useLocation();
-  // setIsLoading(location.state) ;
-  //   const userDetails = JSON.parse(JSON.stringify(isLoading));
-  //   alert(userDetails);
   return (
 
     <Router>
