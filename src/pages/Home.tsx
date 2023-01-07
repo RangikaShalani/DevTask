@@ -1,5 +1,3 @@
-import React from "react"
-import { BrowserRouter as Router, Route,Routes, Link } from "react-router-dom"
 import {useLocation, useNavigate} from "react-router-dom"
 import homeImage from "../images/office-vector.jpg"
 import Button from "@mui/material/Button"
@@ -18,7 +16,7 @@ function Home() {
     <div>
       <div style={{textAlign:"center", marginTop:"50px"}}>
         <Typography variant="h4" gutterBottom>HOME PAGE</Typography>
-        <img src={homeImage} />
+        <img alt="home page img" src={homeImage} />
         <h1>Welcome {userDetails.name}</h1>
         <Button variant="contained" size="medium"  style={{background:"#68BE08"}} onClick={() => navigate("/")}>Logout</Button>
 

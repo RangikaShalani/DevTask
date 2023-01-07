@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route,Routes, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 //material UI import
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -13,7 +10,6 @@ import Button from '@mui/material/Button';
 
 //page or image import
 import loginGif from '../images/loginGIF.gif';
-import changeRoute from '../pages/changeRoute';
 
 
 function Login() {
@@ -65,7 +61,7 @@ function Login() {
                       alignItems="center" 
                       spacing={2}>
                     <Grid  >
-                        <img src={loginGif} />
+                        <img alt='loging page img' src={loginGif} />
                     </Grid>
                     <Grid style={{justifyContent:"center", alignItems:"center" }}>
                         <Box sx={{ '& > :not(style)': {width:'80%' ,height:600},}}>
@@ -109,10 +105,4 @@ function Login() {
 
 export default Login;
 
-function setLoginSuccess(arg0: string) {
-    throw new Error('Function not implemented.');
-}
-function setIsLoading(arg0: string) {
-    throw new Error('Function not implemented.');
-}
 
