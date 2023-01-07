@@ -37,21 +37,16 @@ function Login() {
 
     const handleSubmit =async (event : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        alert(values.email);
         if(!values.email){
             alert("Something in Worng,  User name is Empty...!!! ")
         }else{
             if(!values.password){
                 alert("Something in Worng, Password is Empty...!!! ") 
             }else{
-                console.log("response");
                 const response= await axios.post("http://restapi.adequateshop.com/api/authaccount/login", values);
-                console.log(response);
+                console.log(response.data)
                 if(response.data.message === "success"){
-                    
-                    setIsLoading("true");
-                    const name = values.email;
-                    
+                    const name = response.data.data.Name;
                     navigate("/home", {state:{name}} );
 
                 }else{
@@ -63,7 +58,7 @@ function Login() {
 
     return(
         <div style={{height:'100vh',width:'100vw'}}>
-            <Box sx={{ flexGrow: 1 }}>
+            <Box sx={{ flexGrow: 1 } }>
                 <Grid container
                       direction="row"
                       justifyContent="center"
