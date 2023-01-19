@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route,Routes, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-//material UI import
-import { styled } from '@mui/material/styles';
+import axios from "axios";
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -14,48 +11,41 @@ import Button from '@mui/material/Button';
 import loginGif from '../images/loginGIF.gif';
 
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
-
-
-
 function Login() {
     const navigate = useNavigate()
     type Values = {
-        userName : string,
+        email : string,
         password : string,
         
     }
     const [values,setValues] = useState<Values>({
-        userName : "",
+        email : "",
         password : "",
         
     });
+    
+    
 
     const handleChange = (event : React.ChangeEvent<HTMLInputElement>) => {
         setValues({...values,[event.target.name] : event.target.value});
     }
 
-    const handleSubmit = (event : React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit =async (event : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
-        if(!values.userName){
-            alert("Something in Worng, User name is Empty...!!! ")
+        if(!values.email){
+            alert("Something in Worng,  User name is Empty...!!! ")
         }else{
             if(!values.password){
                 alert("Something in Worng, Password is Empty...!!! ") 
             }else{
-                if(values.userName!='admin' && values.password!='password'){
-                    alert("Something in Worng, User name or Password is Worng...!!! ") 
+                const response= await axios.post("http://restapi.adequateshop.com/api/authaccount/login", values);
+                console.log(response.data)
+                if(response.data.message === "success"){
+                    const name = response.data.data.Name;
+                    navigate("/home", {state:{name}} );
+
                 }else{
-                    const name = values.userName;
-                    navigate("/home", {state: {name}})
+                    alert("Something in Worng , "+ response.data.message);
                 }
             }
         }
@@ -63,14 +53,14 @@ function Login() {
 
     return(
         <div style={{height:'100vh',width:'100vw'}}>
-            <Box sx={{ flexGrow: 1 }}>
+            <Box sx={{ flexGrow: 1 } }>
                 <Grid container
                       direction="row"
                       justifyContent="center"
                       alignItems="center" 
                       spacing={2}>
                     <Grid  >
-                        <img src={loginGif} />
+                        <img alt='loging page img' src={loginGif} />
                     </Grid>
                     <Grid style={{justifyContent:"center", alignItems:"center" }}>
                         <Box sx={{ '& > :not(style)': {width:'80%' ,height:600},}}>
@@ -84,7 +74,7 @@ function Login() {
                                             id="standard-basic" 
                                             label="User Name" 
                                             variant="standard"
-                                            name="userName"
+                                            name="email"
                                             onChange={handleChange}/>
                                         </Grid>
                                         <Grid style={{marginBottom:10}}>
@@ -113,3 +103,5 @@ function Login() {
 }
 
 export default Login;
+
+
